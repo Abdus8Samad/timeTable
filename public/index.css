@@ -1,0 +1,179 @@
+body{
+    font-family:'Helvetica';
+    overflow-x:hidden;
+}
+a.login{
+    float:right;
+    position:relative;
+    top:-18px;
+    right:20px;
+    text-decoration:none;
+    color:rgba(0,0,0,0.5);
+    padding:10px 20px;
+    border-radius:5px;
+    background:#ededed;
+}
+div.Header{
+    padding:30px;
+    position:relative;
+    top:-10px;
+    left:-10px;
+    background:white;
+    width:100%;
+    box-shadow:0 1px 10px rgba(0,0,0,0.2);
+}
+
+span{
+    float:left;
+    position:relative;
+    top:-12px;
+    font-size:24px;
+    color:black;
+}
+
+a.login:hover{
+    background:rgba(0,0,0,0.1);
+}
+table.admin{
+    border-collapse:collapse;
+    width:81%;
+    border:1px solid grey;
+}
+table.index{
+    border-collapse:collapse;
+    margin:auto;
+    width:90%;
+}
+tr.time th{
+    font-size:13px;
+}
+div.flex{
+    display:flex;
+    justify-content:space-evenly;
+    width:100%;
+}
+div.subs{
+    width:15%;
+    background:rgba(0,0,0,0.1);
+    padding:5px;
+    height:auto;
+    position:relative;
+}
+div.subs h3{
+    width:96%;
+    text-align:center;
+    background:#5b3bff;
+    padding:10px 5px;
+    position:relative;
+    top:-18px;
+    left:0;
+}
+td,th{
+    padding:20px 4px;
+    width:9% !important;
+    border:1px solid grey;
+    text-align:center;
+}
+th{
+    background:#5b3bff;
+    padding:20px 10px !important;
+}
+tr:nth-child(even){
+    background:#f2f2f2;
+}
+tr:first-child td:hover{
+    background:initial;
+}
+tr td:hover{
+    background:#ddd;
+    cursor:pointer;
+}
+div.Login{
+    margin:auto;
+    width:400px;
+    background:#f5f5f5;
+    border-radius:4px;
+    border:2px solid rgba(0,0,0,0.4);
+    padding:15px;
+    margin-top:175px;
+    text-align:center;
+}
+div.subs div.subForm{
+}
+div.subs button{
+    font-size:15px !important;
+}
+input, button{
+    display:block;
+    width:85%;
+    margin:auto;
+    margin-top:10px;
+}
+input{
+    font-size:15px;
+    height:40px;
+}
+button{
+    padding:7px;
+    border:none;
+    font-size:25px !important;
+    background:#b8b8b8;
+    border-radius:5px;
+    font-size:large;
+}
+button:hover{
+    background:rgba(0,0,0,0.3);
+    cursor:pointer;
+}
+h4.error{
+    padding:10px;
+    text-align:center;
+    background:#b00020;
+}
+ul{
+    margin-left:-35px;
+    list-style-type:none;
+}
+li{
+    background:rgba(0,0,0,0.1);
+    padding:5px;
+    font-size:17px;
+    text-align:center;
+    margin:5px;
+}
+li:hover span{
+    visibility:visible;
+}
+span.cross{
+    color:red;
+    float:left;
+    font-size:small;
+    position:relative;
+    top:2px;
+    visibility:hidden;
+    opacity:0.5;
+}
+span:hover{
+    opacity:1;
+    cursor:pointer;
+}
+select{
+    width:100%;
+}
+div.save{
+    display:none;
+    position:fixed;
+    background:rgba(0,0,0,0.2);
+    width:60%;
+    bottom:0;
+    right:0;
+    float:right;
+    padding:2px 10px;
+}
+div.save button{
+    position:relative;
+    top:-5px;
+}
+button.saveSubs{
+    display:none;
+}

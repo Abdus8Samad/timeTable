@@ -1,0 +1,6 @@
+{
+    "ignore":[
+        "subs.json",
+        "timeTable.json"
+    ]
+}

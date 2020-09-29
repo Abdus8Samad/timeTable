@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>TT</title>
+        <link rel="stylesheet" href="/index.css" type="text/css" />
+    </head>
+    <body>
+        <div class="Header">
+            <a href="/"><span>Time Table</span></a>
+            <a href="/logout" class="login">Logout</a>
+        </div>
+            <% if(msg != ""){ %>
+                <h4><%= msg %></h4>
+            <% } %>
+        <div class="flex">
+            <div class="subs">
+                <h3>Subjects</h3>
+                    <input type="text" class="subject" placeholder="Add Subject" />
+                    <ul>
+                        <% if(subs.length == 0){ %>
+                            <p>No Subjects</p>
+                        <% } else { %>
+                            <% subs.forEach(function(sub){ %>
+                            <li id="<%= sub %>"><%= sub %><span class="cross" onclick="removeSub(event)">X</span></li>
+                            <% })} %>
+                    </ul>
+                    <button onclick="addSub()">Add</button>
+                    <button onclick="saveSubs()" class="saveSubs">Save</button>
+            </div>
+        <table class="admin">
+            <tr class="time">
+                <td>days/pm</td>
+                <th>8AM - 9AM</th>
+                <th>9AM - 10AM</th>
+                <th>10AM - 11AM</th>
+                <th>11AM - 12PM</th>
+                <th>12PM - 1PM</th>
+                <th>1PM - 2PM</th>
+                <th>2PM - 3PM</th>
+                <th>3PM - 4PM</th>
+                <th>4PM - 5PM</th>
+            </tr>
+            <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"].forEach(function(day){ %>
+                <tr>
+                    <th><%= day %></th>
+                    <% table[day].forEach(function(mySub, index){ %>
+                        <td>
+                            <select id="<%= day %>,<%= index %>" onchange="change(event)">
+                                <option value="No Subject" selected>No Subject</option>
+                                <% subs.forEach(function(sub){ %>
+                                <% if(mySub == sub){ %>
+                                <option value="<%= sub %>" selected><%= sub %></option>
+                                <% } else { %>
+                                    <option value="<%= sub %>"><%= sub %></option>
+                                <% } %>
+                                <% }) %>
+                            </select>
+                        </td>
+                    <% }) %> 
+                </tr>
+            <% }) %>
+        </table>
+        </div>
+        <div class="save">
+            <button onclick="save()">Save and Reload</button>
+        </div>
+        <script>
+            var toAdd = new Set();
+            var toRemove = new Set();
+            var cont = new Set();
+            function save(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST","/save",true);
+                xhr.setRequestHeader('Content-Type','application/json');
+                xhr.send(JSON.stringify({
+                    cont:Array.from(cont)
+                }));
+                xhr.onreadystatechange = function(){
+                    if(this.readyState == 4 && this.status == 200){
+                        window.location.href = "/";
+                    }
+                }
+            }
+            function change(event){
+                var div = document.querySelector("div.save");
+                div.style.display = "block";
+                let id = event.target.id;
+                cont.add([
+                    event.target.value,
+                    id
+                ]);
+            }
+            function addSub(){
+                var val = document.querySelector("input.subject").value;
+                var b = true;
+                Array.from(toAdd).forEach(function(sub){ if(sub === val) b = false;});
+                if(val !== "" && b){
+                    document.querySelector("button.saveSubs").style.display = "block";
+                    var ul = document.querySelector("ul");
+                    var li = document.createElement("li");
+                    li.innerHTML = `<span class="cross" onclick="removeNewSub(event)">X</span>${val}`;
+                    li.id = val;
+                    ul.appendChild(li);
+                    toAdd.add(val);
+                }
+            }
+            function saveSubs(){
+                if(subs.length !== 0){
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST","/saveSubs",true);
+                    xhr.setRequestHeader('Content-Type','application/json');
+                    xhr.send(JSON.stringify({
+                        toAdd:Array.from(toAdd),
+                        toRemove:Array.from(toRemove)
+                    }));
+                    xhr.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                        window.location.href = "/";
+                    }
+    };
+                }
+            }
+            function removeSub(event){
+                document.querySelector("button.saveSubs").style.display = "block";
+                toRemove.add(event.target.parentElement.id);
+                document.querySelectorAll("li").forEach(li =>{
+                    if(li.id === event.target.parentElement.id) li.remove();
+                })
+            }
+            function removeNewSub(event){
+                toAdd.delete(event.target.parentElement.id);
+                event.target.parentElement.remove();
+            }
+        </script>
+    </body>
+</html>

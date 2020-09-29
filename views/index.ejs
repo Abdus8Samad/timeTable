@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>TT</title>
+        <link rel="stylesheet" href="/index.css" type="text/css" />
+    </head>
+    <body>
+        <div class="Header">
+            <a href="/"><span>Time Table</span></a>
+            <a href="/login" class="login">Login</a>
+        </div>
+            <% if(msg != ""){ %>
+                <h4><%= msg %></h4>
+            <% } %>
+        <table class="index">
+            <tr class="time">
+                <td>days/pm</td>
+                <th>8AM - 9AM</th>
+                <th>9AM - 10AM</th>
+                <th>10AM - 11AM</th>
+                <th>11AM - 12PM</th>
+                <th>12PM - 1PM</th>
+                <th>1PM - 2PM</th>
+                <th>2PM - 3PM</th>
+                <th>3PM - 4PM</th>
+                <th>4PM - 5PM</th>
+            </tr>
+            <% ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"].forEach(function(day){ %>
+                <tr>
+                    <th><%= day %></th>
+                    <% table[day].forEach(function(sub){ %>
+                        <td><%= sub %></td>
+                    <% }) %> 
+                </tr>
+            <% }) %>
+        </table>
+
+    </body>
+</html>
+
