@@ -105,7 +105,7 @@
                 }
             }
             function saveSubs(){
-                if(subs.length !== 0){
+                if(Array.from(toAdd).length !== 0 || Array.from(toRemove).length !== 0){
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST","/saveSubs",true);
                     xhr.setRequestHeader('Content-Type','application/json');
